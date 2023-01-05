@@ -1,0 +1,34 @@
+{
+    "Customers": [
+        {
+            "numero_client": "1000",
+            "Nom": "test",
+            "Prenom": "jsp",
+            "dateNaissance": "0",
+            "tel": "0",
+            "compte_courant": "0",
+            "compte_epargne": "0",
+            "interet": "0"
+        },
+        {
+            "numero_client": "0",
+            "Nom": "direz",
+            "Prenom": "antoine",
+            "dateNaissance": "123455",
+            "tel": "12345",
+            "compte_courant": "2445",
+            "compte_epargne": "0",
+            "interet": "2"
+        },
+        {
+            "numero_client": "0",
+            "Nom": "Barge",
+            "Prenom": "zoulette",
+            "dateNaissance": "1234",
+            "tel": "3847576",
+            "compte_courant": "5",
+            "compte_epargne": "0",
+            "interet": "2"
+        }
+    ]
+}
