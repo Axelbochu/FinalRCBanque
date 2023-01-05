@@ -67,6 +67,7 @@ public:
 
     // surcharge operateur
     friend std::ostream& operator<<(std::ostream& os, const client& customer);
+
 };
 
 #endif
