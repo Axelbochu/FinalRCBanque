@@ -1,7 +1,10 @@
 #include "inscriptionFrame.h"
 #include "Customer.hpp"
 #include "Customer_for_JSON.hpp"
+#include "rcbanqueApp.h"
 #include <string>
+#include "mainframe.h"
+#include "acceuilFrame.hpp"
 
 //on affecte les identifiants aux boutons
 const int InscriptionFrame::ID_BTN_VALIDER = wxNewId();
@@ -15,7 +18,6 @@ END_EVENT_TABLE()
 InscriptionFrame::InscriptionFrame() :wxFrame(NULL, wxID_ANY, _T("RCBanque")) {
     // Création du panel d'affichage
     wxPanel* panelAffichage = new wxPanel(this, -1);
-    panelAffichage->SetBackgroundColour(wxColour(*wxBLUE));
 
     // Création du wxBoxSizer intermédiaire
     wxBoxSizer* sizer_intermed = new wxBoxSizer(wxVERTICAL);
@@ -134,6 +136,10 @@ void InscriptionFrame::OnButtonValiderClicked(wxCommandEvent& event) {
             wxMessageBox(_T("Une erreur inconnu s'est produite"));
         }
         m_frame->Destroy();
+        AcceuilFrame* frame = new AcceuilFrame();
+        frame->m_frame = frame;
+        frame->Show();
+        mainframe->Destroy();
     }
 }
 

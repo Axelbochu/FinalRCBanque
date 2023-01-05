@@ -10,7 +10,8 @@ client* actualClient;
 bool rcBanqueApp::OnInit()
 {
 	//on créer un objet mainFrame
-	MainFrame* frame = new MainFrame();
+	AcceuilFrame* frame = new AcceuilFrame();
+	frame->m_frame = frame;
 	//on l'affiche
 	frame->Show();
 	//indique que l'application peut continuer 

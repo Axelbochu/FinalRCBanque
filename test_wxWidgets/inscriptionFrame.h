@@ -12,6 +12,7 @@ public:
 	InscriptionFrame();
 	//destructeur
 	~InscriptionFrame();
+	wxFrame* mainframe;
 	void setFramePtn(InscriptionFrame* frame);
 private:
 	InscriptionFrame* m_frame; //pointeru sur notre frame

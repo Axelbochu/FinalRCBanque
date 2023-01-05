@@ -10,50 +10,25 @@
 const int MainFrame::ID_BTN_DEPOT = wxNewId();
 const int MainFrame::ID_BTN_EPARGNE = wxNewId();
 const int MainFrame::ID_BTN_VIREMENT = wxNewId();
-const int MainFrame::ID_BTN_PROFIL = wxNewId();
+
 //Definition de la table des evenements
 BEGIN_EVENT_TABLE(MainFrame,wxFrame)
 	EVT_BUTTON(ID_BTN_DEPOT,MainFrame::OnButtonDepotClicked)
 	EVT_BUTTON(ID_BTN_EPARGNE, MainFrame::OnButtonEpargneClicked)
 	EVT_BUTTON(ID_BTN_VIREMENT, MainFrame::OnButtonVirementClicked)
-	EVT_BUTTON(ID_BTN_PROFIL, MainFrame::OnButtonProfilClicked)
 END_EVENT_TABLE()
 
 
 //constructeur
-MainFrame::MainFrame() : wxFrame(NULL, wxID_ANY, _T("RCBanque")) 
+MainFrame::MainFrame(client* actualClientConstructeur) : wxFrame(NULL, wxID_ANY, _T("RCBanque"))
 {	
+	actualClient = actualClientConstructeur;
 	//creation panel principal
 	wxPanel* panel = new wxPanel(this, -1);
 
 
 	//on créer le wxBoxSizer Principal
 	wxBoxSizer* mainsizer = new wxBoxSizer(wxVERTICAL);
-
-		wxStaticBoxSizer* profilBox = new wxStaticBoxSizer(wxVERTICAL, panel, _T("Gestion de profils :"));
-			//création du boutons add profil
-			wxButton* newProfil = new wxButton(panel, ID_BTN_PROFIL, _T("Ajouter un Profil"));
-			profilBox->Add(newProfil, 0, wxALL, 10);
-
-			//test manuel
-
-			
-
-			actualClient = new client(0, "Bochu", "Axel", 19082003, 0601010101, 900, 560, 5);//on créer le premier client manuellement
-			clientsTbl = json_to_vector1();
-
-			//gestion profil
-			//radio box pour banque
-			wxArrayString choicesProfil;
-			for (int i = 0; i < clientsTbl.size(); i++)
-			{
-				choicesProfil.push_back(clientsTbl[i].nomGet());
-			}
-			wxRadioBox* m_radioProfil = new wxRadioBox(panel, wxID_ANY, _T("Votre profil :"), wxDefaultPosition, wxDefaultSize, choicesProfil, 6, wxRA_HORIZONTAL);
-			profilBox->Add(m_radioProfil, 0, wxEXPAND);
-
-		mainsizer->Add(profilBox, 0, wxALL | wxEXPAND, 10);
-
 		//radio box pour banque
 		wxArrayString choices;
 		choices.Add("RCBanque");
@@ -123,14 +98,11 @@ MainFrame::~MainFrame()
 	
 }
 
-//evenement clicked
-void MainFrame::OnButtonProfilClicked(wxCommandEvent& event) {
-
-	InscriptionFrame* inscriptionFrame = new InscriptionFrame();
-	inscriptionFrame->setFramePtn(inscriptionFrame);
-	inscriptionFrame->Show();
+void MainFrame::setActualClient(client* actualClient) {
+	this->actualClient = actualClient;
 }
 
+//evenement clicked
 void MainFrame::OnButtonDepotClicked(wxCommandEvent& event) {
 
 	DepotFrame* depotFrame = new DepotFrame();
@@ -147,4 +119,5 @@ void MainFrame::OnButtonEpargneClicked(wxCommandEvent& event) {
 
 void MainFrame::OnButtonVirementClicked(wxCommandEvent& event) {
 	wxMessageBox(_T("Appel de la methode virement"));
+	//m_frame->Destroy();
 }

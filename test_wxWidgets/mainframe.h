@@ -10,22 +10,24 @@ class MainFrame : public wxFrame
 {
 public:
 	//constructeur
-	MainFrame();
+	MainFrame(client* actualClientConstructeur);
 	//destructeur
 	~MainFrame();
+
+	wxFrame* m_frame;
+
+	void setActualClient(client* actualClient);
 private:
-	client* actualClient; //stocck le client actuel
-	vector< client > clientsTbl; //stock la totalité des profils
+	client* actualClient; //stock le client actuel
 	//pointeur vers les montants d'argents
 	wxStaticText* soldeDepot, *epargneMtn;
 	//identifiants boutons
-	static const int ID_BTN_DEPOT, ID_BTN_EPARGNE, ID_BTN_VIREMENT, ID_BTN_PROFIL;
+	static const int ID_BTN_DEPOT, ID_BTN_EPARGNE, ID_BTN_VIREMENT;
 
 	//event bouttons click
 	void OnButtonDepotClicked(wxCommandEvent& event);
 	void OnButtonEpargneClicked(wxCommandEvent& event);
 	void OnButtonVirementClicked(wxCommandEvent& event);
-	void OnButtonProfilClicked(wxCommandEvent& event);
 
 	//tabble des evenements
 	DECLARE_EVENT_TABLE();
