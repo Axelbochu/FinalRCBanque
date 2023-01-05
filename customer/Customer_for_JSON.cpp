@@ -228,4 +228,46 @@ client virement(client customer, string enter) {
     return customer;
 }
 
+client virement_negatif(client customer, string enter) {
+    int vir = sommevirement(enter); 
+    int solde = customer.comptecourantGet();
+    int total = solde - vir;
+    customer.comptecourantSet(total);
+    return customer;
+}
+client virementLocal(client customer_send, client customer, int value) {
+    
+    int solde_customer = customer.comptecourantGet();
+    int solde_customer_send = customer_send.comptecourantGet();
+    int total_customer_send = solde_customer_send - value;
+    int total = solde_customer + value;
+    customer.comptecourantSet(total);
+    return customer;
+}
+client epargne_to_courant(client customer, int value) {
+    int valeur_courant = customer.comptecourantGet();
+    int valeur_epargne = customer.compteepargneGet();
+    
+    int total_courant = valeur_courant + value;
+    int total_epargne = valeur_epargne - value;
+
+    customer.comptecourantSet(total_courant);
+    customer.compteepargneSet(total_epargne);
+
+    return(customer);
+
+}
+client courant_to_epargne(client customer, int value) {
+    int valeur_courant = customer.comptecourantGet();
+    int valeur_epargne = customer.compteepargneGet();
+
+    int total_courant = valeur_courant - value;
+    int total_epargne = valeur_epargne + value;
+
+    customer.comptecourantSet(total_courant);
+    customer.compteepargneSet(total_epargne);
+
+    return(customer);
+}
+
 
