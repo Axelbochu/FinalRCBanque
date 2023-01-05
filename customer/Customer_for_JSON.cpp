@@ -171,6 +171,45 @@ vector<client> json_to_vector3() {
     }
     return cust;
 }
+void vector1_to_json(vector<client> customer_vec) {
+    ptree pt_accounts;
+    ptree pt_write;
+    for (int i = 0; i < (customer_vec.size() - 1);i++) {
+        pt_accounts.push_back({ "", get_a_ptree_from_a_customer(customer_vec[i])});
+    }
+    pt_write.add_child("Customers", pt_accounts);
+
+    // on ecrit dans le json
+    ofstream file_out("../../../../Boost_JSON/bdd1.json");
+    write_json(file_out, pt_write);
+    file_out.close();
+}
+void vector2_to_json(vector<client> customer_vec){
+    ptree pt_accounts;
+    ptree pt_write;
+    for (int i = 0; i < (customer_vec.size() - 1); i++) {
+        pt_accounts.push_back({ "", get_a_ptree_from_a_customer(customer_vec[i]) });
+    }
+    pt_write.add_child("Customers", pt_accounts);
+
+    // on ecrit dans le json
+    ofstream file_out("../../../../Boost_JSON/bdd2.json");
+    write_json(file_out, pt_write);
+    file_out.close();
+}
+void vector3_to_json(vector<client> customer_vec) {
+    ptree pt_accounts;
+    ptree pt_write;
+    for (int i = 0; i < (customer_vec.size() - 1); i++) {
+        pt_accounts.push_back({ "", get_a_ptree_from_a_customer(customer_vec[i]) });
+    }
+    pt_write.add_child("Customers", pt_accounts);
+
+    // on ecrit dans le json
+    ofstream file_out("../../../../Boost_JSON/bdd3.json");
+    write_json(file_out, pt_write);
+    file_out.close();
+}
 
 
 vector<string> separationvirement(string enter) {
@@ -258,6 +297,7 @@ client epargne_to_courant(client customer, int value) {
 
 }
 client courant_to_epargne(client customer, int value) {
+    
     int valeur_courant = customer.comptecourantGet();
     int valeur_epargne = customer.compteepargneGet();
 
@@ -266,7 +306,27 @@ client courant_to_epargne(client customer, int value) {
 
     customer.comptecourantSet(total_courant);
     customer.compteepargneSet(total_epargne);
+    int numagence = (customer.numeroClientGet())/1000;
+        int numclient = (customer.numeroClientGet()) % 1000;
 
+        if (numagence == 1) {
+
+            vector<client> tmp = json_to_vector1();
+            tmp[numclient] = customer;
+            vector1_to_json(tmp);
+
+        }
+        else if(numagence == 2) {
+            vector<client> tmp = json_to_vector2();
+            tmp[numclient] = customer;
+            vector2_to_json(tmp);
+        }
+        else if( numagence == 3)
+        {
+            vector<client> tmp = json_to_vector3();
+            tmp[numclient] = customer;
+            vector3_to_json(tmp);
+        }
     return(customer);
 }
 
