@@ -31,6 +31,7 @@ int numagence(string enter);
 int numclient(string enter);
 int sommevirement(string enter);
 client virement(client customer, string enter);
+client virement_negatif(client customer, string enter);
 client epargne_to_courant(client customer, int value);
 client courant_to_epargne(client customer, int value);
 client virementLocal(client customer_send, client customer, int value);
