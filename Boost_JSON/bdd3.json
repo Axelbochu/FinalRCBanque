@@ -9,6 +9,16 @@
             "compte_courant": "32",
             "compte_epargne": "7043",
             "interet": "0"
+        },
+        {
+            "numero_client": "0",
+            "Nom": "DUPONT",
+            "Prenom": "Antoine",
+            "dateNaissance": "123",
+            "tel": "123",
+            "compte_courant": "5000",
+            "compte_epargne": "0",
+            "interet": "2"
         }
     ]
 }
