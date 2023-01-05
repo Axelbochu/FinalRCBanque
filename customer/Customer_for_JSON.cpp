@@ -283,7 +283,7 @@ client virementLocal(client customer_send, client customer, int value) {
     customer.comptecourantSet(total);
     return customer;
 }
-client epargne_to_courant(client customer, int value) {
+void epargne_to_courant(client customer, int value) {
     int valeur_courant = customer.comptecourantGet();
     int valeur_epargne = customer.compteepargneGet();
     
@@ -292,11 +292,31 @@ client epargne_to_courant(client customer, int value) {
 
     customer.comptecourantSet(total_courant);
     customer.compteepargneSet(total_epargne);
+    int numagence = (customer.numeroClientGet()) / 1000;
+    int numclient = (customer.numeroClientGet()) % 1000;
 
-    return(customer);
+    if (numagence == 1) {
+
+        vector<client> tmp = json_to_vector1();
+        tmp[numclient] = customer;
+        vector1_to_json(tmp);
+
+    }
+    else if (numagence == 2) {
+        vector<client> tmp = json_to_vector2();
+        tmp[numclient] = customer;
+        vector2_to_json(tmp);
+    }   
+    else if (numagence == 3)
+    {
+        vector<client> tmp = json_to_vector3();
+        tmp[numclient] = customer ;
+        vector3_to_json(tmp);
+    }
+    
 
 }
-client courant_to_epargne(client customer, int value) {
+void courant_to_epargne(client customer, int value) {
     
     int valeur_courant = customer.comptecourantGet();
     int valeur_epargne = customer.compteepargneGet();
@@ -307,27 +327,27 @@ client courant_to_epargne(client customer, int value) {
     customer.comptecourantSet(total_courant);
     customer.compteepargneSet(total_epargne);
     int numagence = (customer.numeroClientGet())/1000;
-        int numclient = (customer.numeroClientGet()) % 1000;
+    int numclient = (customer.numeroClientGet()) % 1000;
 
-        if (numagence == 1) {
+    if (numagence == 1) {
 
-            vector<client> tmp = json_to_vector1();
-            tmp[numclient] = customer;
-            vector1_to_json(tmp);
+        vector<client> tmp = json_to_vector1();
+        tmp[numclient] = customer;
+        vector1_to_json(tmp);
 
-        }
-        else if(numagence == 2) {
-            vector<client> tmp = json_to_vector2();
-            tmp[numclient] = customer;
-            vector2_to_json(tmp);
-        }
-        else if( numagence == 3)
-        {
-            vector<client> tmp = json_to_vector3();
-            tmp[numclient] = customer;
-            vector3_to_json(tmp);
-        }
-    return(customer);
+    }
+    else if(numagence == 2) {
+        vector<client> tmp = json_to_vector2();
+        tmp[numclient] = customer;
+        vector2_to_json(tmp);
+    }
+    else if( numagence == 3)
+    {
+        vector<client> tmp = json_to_vector3();
+        tmp[numclient] = customer;
+        vector3_to_json(tmp);
+    }
+    
 }
 
 
