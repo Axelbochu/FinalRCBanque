@@ -122,14 +122,24 @@ void InscriptionFrame::OnButtonValiderClicked(wxCommandEvent& event) {
         wxMessageBox(_T("Veuillez remplir tous les champs correctement svp."));
     }
     else {
-        client newClient(0, m_nom->GetValue().ToStdString(), m_prenom->GetValue().ToStdString(), wxAtoi(m_date->GetValue()), wxAtoi(m_tel->GetValue()), wxAtoi(m_fond->GetValue()), 0, 2);
         if (m_radioBox->GetSelection() == 0) {
+            vector<client> tmp = json_to_vector1();
+            int tmpNum = tmp[tmp.size()-1].numeroClientGet();
+            client newClient(tmpNum+1, m_nom->GetValue().ToStdString(), m_prenom->GetValue().ToStdString(), wxAtoi(m_date->GetValue()), wxAtoi(m_tel->GetValue()), wxAtoi(m_fond->GetValue()), 0, 2);
             add_customer1(newClient);
         }
         else if (m_radioBox->GetSelection() == 1) {
+            vector<client> tmp = json_to_vector2();
+            int tmpNum = tmp[tmp.size()-1].numeroClientGet();
+
+            client newClient(tmpNum + 1, m_nom->GetValue().ToStdString(), m_prenom->GetValue().ToStdString(), wxAtoi(m_date->GetValue()), wxAtoi(m_tel->GetValue()), wxAtoi(m_fond->GetValue()), 0, 2);
             add_customer2(newClient);
         }
         else if (m_radioBox->GetSelection() == 2) {
+            vector<client> tmp = json_to_vector3();
+            int tmpNum = tmp[tmp.size()-1].numeroClientGet();
+
+            client newClient(tmpNum + 1, m_nom->GetValue().ToStdString(), m_prenom->GetValue().ToStdString(), wxAtoi(m_date->GetValue()), wxAtoi(m_tel->GetValue()), wxAtoi(m_fond->GetValue()), 0, 2);
             add_customer3(newClient);
         }
         else {

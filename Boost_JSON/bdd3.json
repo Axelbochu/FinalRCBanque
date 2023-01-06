@@ -1,7 +1,7 @@
 {
     "Customers": [
         {
-            "numero_client": "1000",
+            "numero_client": "3000",
             "Nom": "BARGE",
             "Prenom": "Paul",
             "dateNaissance": "123",
@@ -11,7 +11,7 @@
             "interet": "0"
         },
         {
-            "numero_client": "0",
+            "numero_client": "3001",
             "Nom": "DUPONT",
             "Prenom": "Antoine",
             "dateNaissance": "123",

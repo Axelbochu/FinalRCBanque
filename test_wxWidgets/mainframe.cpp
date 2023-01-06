@@ -5,6 +5,7 @@
 #include "Customer.hpp"
 #include "Customer_for_JSON.hpp"
 #include <string>
+#include "virementFrame.hpp"
 
 //on affecte les identifiants aux boutons
 const int MainFrame::ID_BTN_DEPOT = wxNewId();
@@ -22,7 +23,9 @@ END_EVENT_TABLE()
 //constructeur
 MainFrame::MainFrame(client* actualClientConstructeur) : wxFrame(NULL, wxID_ANY, _T("RCBanque"))
 {	
-	actualClient = actualClientConstructeur;
+	
+	actualClient = new client(actualClientConstructeur->numeroClientGet(), actualClientConstructeur->nomGet(), actualClientConstructeur->prenomGet(), actualClientConstructeur->dateNaissanceGet(), actualClientConstructeur->telGet(), actualClientConstructeur->comptecourantGet(), actualClientConstructeur->compteepargneGet(), actualClientConstructeur->interetGet());
+
 	//creation panel principal
 	wxPanel* panel = new wxPanel(this, -1);
 
@@ -48,6 +51,18 @@ MainFrame::MainFrame(client* actualClientConstructeur) : wxFrame(NULL, wxID_ANY,
 			wxString wxAcceuilTextContainer(acceuilTextContainer);
 			wxStaticText* introName = new wxStaticText(panel, wxID_ANY, wxAcceuilTextContainer);
 			centralBox->Add(introName, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
+
+			//static text num client
+			
+			std::string numClientTextContainer = "Numéro Client :  ";
+			numClientTextContainer += std::to_string(actualClient->numeroClientGet());
+			numClientTextContainer += " .";
+			wxString wxnumClientTextContainer(numClientTextContainer);
+			wxStaticText* introNumClient = new wxStaticText(panel, wxID_ANY, wxnumClientTextContainer);
+			centralBox->Add(introNumClient, 0, wxLEFT|wxRIGHT|wxBOTTOM | wxALIGN_CENTER_HORIZONTAL, 10);
+
+
+
 			//on créer le box sizer contenant les autres
 			wxBoxSizer* accountContainer = new wxBoxSizer(wxHORIZONTAL);
 			//on ajoute les comptes
@@ -79,7 +94,6 @@ MainFrame::MainFrame(client* actualClientConstructeur) : wxFrame(NULL, wxID_ANY,
 		}
 		mainsizer->Add(centralBox, 0, wxALL | wxEXPAND, 10);
 
-
 	//affectation sizer principal fenetre
 	panel->SetSizer(mainsizer);
 	//calcule taille minimal fenetre
@@ -98,13 +112,8 @@ MainFrame::~MainFrame()
 	
 }
 
-void MainFrame::setActualClient(client* actualClient) {
-	this->actualClient = actualClient;
-}
-
 //evenement clicked
 void MainFrame::OnButtonDepotClicked(wxCommandEvent& event) {
-
 	DepotFrame* depotFrame = new DepotFrame();
 	depotFrame->setSolde(actualClient);
 	depotFrame->Show();
@@ -118,6 +127,9 @@ void MainFrame::OnButtonEpargneClicked(wxCommandEvent& event) {
 
 
 void MainFrame::OnButtonVirementClicked(wxCommandEvent& event) {
-	wxMessageBox(_T("Appel de la methode virement"));
-	//m_frame->Destroy();
+	VirementFrame* virementframe = new VirementFrame();
+	virementframe->setActiveClient(actualClient);
+	virementframe->Show();
+	virementframe->centralFrame = virementframe;
+	virementframe->pastFrame = m_frame;
 }

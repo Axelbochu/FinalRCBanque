@@ -26,7 +26,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 find_package(wxWidgets REQUIRED COMPONENTS net core base)
 include(${wxWidgets_USE_FILE})
 
-add_executable(example_of_use depotFrame.cpp epargneFrame.cpp inscriptionFrame.cpp mainFrame.cpp rcbanqueApp.cpp acceuilFrame.cpp)
+add_executable(example_of_use depotFrame.cpp epargneFrame.cpp inscriptionFrame.cpp mainFrame.cpp rcbanqueApp.cpp acceuilFrame.cpp "virementFrame.cpp")
 
 if(MSVC)
     set_target_properties(example_of_use PROPERTIES LINK_FLAGS /SUBSYSTEM:WINDOWS)

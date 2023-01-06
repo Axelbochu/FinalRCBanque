@@ -15,8 +15,6 @@ public:
 	~MainFrame();
 
 	wxFrame* m_frame;
-
-	void setActualClient(client* actualClient);
 private:
 	client* actualClient; //stock le client actuel
 	//pointeur vers les montants d'argents

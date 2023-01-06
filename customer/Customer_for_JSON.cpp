@@ -174,7 +174,7 @@ vector<client> json_to_vector3() {
 void vector1_to_json(vector<client> customer_vec) {
     ptree pt_accounts;
     ptree pt_write;
-    for (int i = 0; i < (customer_vec.size() - 1);i++) {
+    for (int i = 0; i < (customer_vec.size());i++) {
         pt_accounts.push_back({ "", get_a_ptree_from_a_customer(customer_vec[i])});
     }
     pt_write.add_child("Customers", pt_accounts);
@@ -187,7 +187,7 @@ void vector1_to_json(vector<client> customer_vec) {
 void vector2_to_json(vector<client> customer_vec){
     ptree pt_accounts;
     ptree pt_write;
-    for (int i = 0; i < (customer_vec.size() - 1); i++) {
+    for (int i = 0; i < (customer_vec.size()); i++) {
         pt_accounts.push_back({ "", get_a_ptree_from_a_customer(customer_vec[i]) });
     }
     pt_write.add_child("Customers", pt_accounts);
@@ -200,7 +200,7 @@ void vector2_to_json(vector<client> customer_vec){
 void vector3_to_json(vector<client> customer_vec) {
     ptree pt_accounts;
     ptree pt_write;
-    for (int i = 0; i < (customer_vec.size() - 1); i++) {
+    for (int i = 0; i < (customer_vec.size()); i++) {
         pt_accounts.push_back({ "", get_a_ptree_from_a_customer(customer_vec[i]) });
     }
     pt_write.add_child("Customers", pt_accounts);
@@ -283,68 +283,68 @@ client virementLocal(client customer_send, client customer, int value) {
     customer.comptecourantSet(total);
     return customer;
 }
-void epargne_to_courant(client customer, int value) {
-    int valeur_courant = customer.comptecourantGet();
-    int valeur_epargne = customer.compteepargneGet();
+void epargne_to_courant(client* customer, int value) {
+    int valeur_courant = customer->comptecourantGet();
+    int valeur_epargne = customer->compteepargneGet();
     
     int total_courant = valeur_courant + value;
     int total_epargne = valeur_epargne - value;
 
-    customer.comptecourantSet(total_courant);
-    customer.compteepargneSet(total_epargne);
-    int numagence = (customer.numeroClientGet()) / 1000;
-    int numclient = (customer.numeroClientGet()) % 1000;
+    customer->comptecourantSet(total_courant);
+    customer->compteepargneSet(total_epargne);
+    int numagence = (customer->numeroClientGet()) / 1000;
+    int numclient = (customer->numeroClientGet()) % 1000;
 
     if (numagence == 1) {
 
         vector<client> tmp = json_to_vector1();
-        tmp[numclient] = customer;
+        tmp[numclient] = *customer;
         vector1_to_json(tmp);
 
     }
     else if (numagence == 2) {
         vector<client> tmp = json_to_vector2();
-        tmp[numclient] = customer;
+        tmp[numclient] = *customer;
         vector2_to_json(tmp);
     }   
     else if (numagence == 3)
     {
         vector<client> tmp = json_to_vector3();
-        tmp[numclient] = customer ;
+        tmp[numclient] = *customer ;
         vector3_to_json(tmp);
     }
     
 
 }
-void courant_to_epargne(client customer, int value) {
+void courant_to_epargne(client* customer, int value) {
     
-    int valeur_courant = customer.comptecourantGet();
-    int valeur_epargne = customer.compteepargneGet();
+    int valeur_courant = customer->comptecourantGet();
+    int valeur_epargne = customer->compteepargneGet();
 
     int total_courant = valeur_courant - value;
     int total_epargne = valeur_epargne + value;
 
-    customer.comptecourantSet(total_courant);
-    customer.compteepargneSet(total_epargne);
-    int numagence = (customer.numeroClientGet())/1000;
-    int numclient = (customer.numeroClientGet()) % 1000;
+    customer->comptecourantSet(total_courant);
+    customer->compteepargneSet(total_epargne);
+    int numagence = (customer->numeroClientGet())/1000;
+    int numclient = (customer->numeroClientGet()) % 1000;
 
     if (numagence == 1) {
 
         vector<client> tmp = json_to_vector1();
-        tmp[numclient] = customer;
+        tmp[numclient] = *customer;
         vector1_to_json(tmp);
 
     }
     else if(numagence == 2) {
         vector<client> tmp = json_to_vector2();
-        tmp[numclient] = customer;
+        tmp[numclient] = *customer;
         vector2_to_json(tmp);
     }
     else if( numagence == 3)
     {
         vector<client> tmp = json_to_vector3();
-        tmp[numclient] = customer;
+        tmp[numclient] = *customer;
         vector3_to_json(tmp);
     }
     
